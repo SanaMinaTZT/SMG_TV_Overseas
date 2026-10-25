@@ -1,13 +1,13 @@
 // ==UserScript==
 // @name             收看SMGTV电视节目 (五星体育海外直连修改版)
-// @namespace        https://github.com/SanaMinaTZT/SMG_TV
+// @namespace        https://github.com/SanaMinaTZT/SMG_TV_Overseas
 // @version          0.24.0
 // @description      SMGTV 电视直播与回放（基于 jolin1314joker/SMG_TV 修改）。解决海外 IP 访问火山引擎 CDN 报 403 Forbidden 问题，五星体育支持免代理直连播放，并支持动态获取回看节目提取 Token。
 // @author           SanaMinaTZT (Based on jolin1314joker/SMG_TV)
-// @homepageURL      https://github.com/SanaMinaTZT/SMG_TV
-// @supportURL       https://github.com/SanaMinaTZT/SMG_TV/issues
-// @downloadURL      https://raw.githubusercontent.com/SanaMinaTZT/SMG_TV/main/smg_fivestar_fixed.user.js
-// @updateURL        https://raw.githubusercontent.com/SanaMinaTZT/SMG_TV/main/smg_fivestar_fixed.user.js
+// @homepageURL      https://github.com/SanaMinaTZT/SMG_TV_Overseas
+// @supportURL       https://github.com/SanaMinaTZT/SMG_TV_Overseas/issues
+// @downloadURL      https://raw.githubusercontent.com/SanaMinaTZT/SMG_TV_Overseas/main/smg_fivestar.user.js
+// @updateURL        https://raw.githubusercontent.com/SanaMinaTZT/SMG_TV_Overseas/main/smg_fivestar.user.js
 // @match            https://live.kankanews.com/*
 // @match            https://m.kankanews.com/*
 // @match            http://live.kankanews.com/*
