@@ -1,13 +1,13 @@
 // ==UserScript==
-// @name             收看SMGTV电视节目 (五星体育全球海外免梯直连版 · 1080P硬解专修)
-// @namespace        https://github.com/SanaMinaTZT/SMG_TV_Overseas
+// @name             收看SMGTV电视节目 (五星体育海外直连修改版)
+// @namespace        https://github.com/SanaMinaTZT/SMG_TV
 // @version          0.24.0
-// @description      SMGTV 电视直播与回放（五星体育专修 · 全球海外免梯直连版）；基于原项目 jolin1314joker/SMG_TV 由 AI 全程逆向与重构；集成现代 Hls.js@1.5.17 彻底攻克「只有声音无画面」黑屏难题，破除9重遮罩硬解 1080P 视频流；五星体育新媒体独立源 + 原生 DES-ECB 解密 + no-referrer 穿透 Referer ACL，全球海外地区（美/加/英/欧/澳/日/韩/新/港澳台等所有非大陆IP）免梯子免回国VPN直连秒开，同时完全兼容中国大陆网络。
-// @author           AI Assistant (Based on jolin1314joker/SMG_TV)
-// @homepageURL      https://github.com/SanaMinaTZT/SMG_TV_Overseas
-// @supportURL       https://github.com/SanaMinaTZT/SMG_TV_Overseas/issues
-// @downloadURL      https://raw.githubusercontent.com/SanaMinaTZT/SMG_TV_Overseas/main/smg_fivestar.user.js
-// @updateURL        https://raw.githubusercontent.com/SanaMinaTZT/SMG_TV_Overseas/main/smg_fivestar.user.js
+// @description      SMGTV 电视直播与回放（基于 jolin1314joker/SMG_TV 修改）。解决海外 IP 访问火山引擎 CDN 报 403 Forbidden 问题，五星体育支持免代理直连播放，并支持动态获取回看节目提取 Token。
+// @author           SanaMinaTZT (Based on jolin1314joker/SMG_TV)
+// @homepageURL      https://github.com/SanaMinaTZT/SMG_TV
+// @supportURL       https://github.com/SanaMinaTZT/SMG_TV/issues
+// @downloadURL      https://raw.githubusercontent.com/SanaMinaTZT/SMG_TV/main/smg_fivestar.user.js
+// @updateURL        https://raw.githubusercontent.com/SanaMinaTZT/SMG_TV/main/smg_fivestar.user.js
 // @match            https://live.kankanews.com/*
 // @match            https://m.kankanews.com/*
 // @match            http://live.kankanews.com/*
@@ -23,18 +23,10 @@
 // ==/UserScript==
 
 /* =========================================================================
- * 项目声明与致谢：
- * 1. 本项目完全由 AI（Advanced Agentic AI）逆向、排查分析与重构修改完成。
- * 2. 本脚本基于原开源项目 https://github.com/jolin1314joker/SMG_TV 进行深度改良。
- * 3. 适用范围：
- *    - 支持全球所有海外地区（美国、加拿大、英国、欧洲、澳洲、新西兰、日本、韩国、新加坡、港澳台等所有非中国大陆 IP）免梯子 / 免回国 VPN 1080P 直连观看！
- *    - 同时完全兼容中国大陆本地网络直连。
- * 4. 核心原理与攻坚：
- *    - 根因：火山引擎 CDN (volc-stream.kksmg.com) 边缘节点对海外 IP 施加了严格的 Geo-IP 阻断 (HTTP 403 Forbidden)，导致海外直接瘫痪；
- *    - 破局：逆向挖掘五星体育专用新媒体源 cms-tvflow.gsports.net.cn（无任何 Geo-IP 封锁）；
- *    - 解密：由于非主域未挂载 Webpack DES 解密函数，脚本内置工业级轻量 DES-ECB 原生解密引擎；
- *    - 穿透：基于 no-referrer 穿透 Referer ACL，并拦截 CORS 跨域请求；
- *    - 渲染：引入现代 Hls.js@1.5.17 解复用器，接管 DOM 树穿透 9 种遮罩层，彻底攻克「只有声音没有画面」的渲染卡点，实现 1080P 满血硬解秒开。
+ * 项目说明与致谢：
+ * 1. 本脚本基于开源项目 https://github.com/jolin1314joker/SMG_TV 进行修改（修改部分由 AI 协助完成）。
+ * 2. 主要解决海外网络环境下访问看看新闻五星体育直播时 CDN 报 403 Forbidden 的问题。
+ * 3. 引入 hls.js 驱动新媒体直播流解码播放，并改为动态获取近期节目单提取回看 Token。
  * ========================================================================= */
 
 (function() {
