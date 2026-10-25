@@ -1,4 +1,6 @@
-# SMG_TV (海外直连修改版)
+# SMG_TV_Overseas
+
+> **SMGTV 电视直播与回放油猴脚本（五星体育全球海外免梯直连版 · 1080P硬解专修）**
 
 本脚本基于 [jolin1314joker/SMG_TV](https://github.com/jolin1314joker/SMG_TV) 修改（修改部分由 AI 协助完成），主要用于解决海外 IP 访问看看新闻（`live.kankanews.com`）收看五星体育时出现 `403 Forbidden` 的问题。
 
@@ -15,7 +17,8 @@
 
 1. 浏览器安装 [Tampermonkey (油猴)](https://www.tampermonkey.net/) 扩展。
 2. 点击下方链接一键安装脚本：
-   👉 **[点击安装 smg_fivestar.user.js](https://raw.githubusercontent.com/SanaMinaTZT/SMG_TV/main/smg_fivestar.user.js)**
+   👉 **[点击安装 smg_fivestar.user.js](https://raw.githubusercontent.com/SanaMinaTZT/SMG_TV_Overseas/main/smg_fivestar.user.js)**
+   👉 备用链接：[smg_fivestar_fixed.user.js](https://raw.githubusercontent.com/SanaMinaTZT/SMG_TV_Overseas/main/smg_fivestar_fixed.user.js)
 3. 打开 [看看新闻 - 五星体育直播页](https://live.kankanews.com/huikan?id=10) 即可观看。
    - 首次打开若油猴提示跨域请求授权（`gsports-api.smgtech.net` / `cms-tvflow.gsports.net.cn`），点击“始终允许”即可。
 
