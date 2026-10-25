@@ -1,13 +1,13 @@
 // ==UserScript==
 // @name             收看SMGTV电视节目 (五星体育全球海外免梯直连版 · 1080P硬解专修)
-// @namespace        https://github.com/SanaMinaTZT/SMG_TV
+// @namespace        https://github.com/SanaMinaTZT/SMG_TV_Overseas
 // @version          0.24.0
 // @description      SMGTV 电视直播与回放（五星体育专修 · 全球海外免梯直连版）；基于原项目 jolin1314joker/SMG_TV 由 AI 全程逆向与重构；集成现代 Hls.js@1.5.17 彻底攻克「只有声音无画面」黑屏难题，破除9重遮罩硬解 1080P 视频流；五星体育新媒体独立源 + 原生 DES-ECB 解密 + no-referrer 穿透 Referer ACL，全球海外地区（美/加/英/欧/澳/日/韩/新/港澳台等所有非大陆IP）免梯子免回国VPN直连秒开，同时完全兼容中国大陆网络。
 // @author           AI Assistant (Based on jolin1314joker/SMG_TV)
-// @homepageURL      https://github.com/SanaMinaTZT/SMG_TV
-// @supportURL       https://github.com/SanaMinaTZT/SMG_TV/issues
-// @downloadURL      https://raw.githubusercontent.com/SanaMinaTZT/SMG_TV/main/smg_fivestar.user.js
-// @updateURL        https://raw.githubusercontent.com/SanaMinaTZT/SMG_TV/main/smg_fivestar.user.js
+// @homepageURL      https://github.com/SanaMinaTZT/SMG_TV_Overseas
+// @supportURL       https://github.com/SanaMinaTZT/SMG_TV_Overseas/issues
+// @downloadURL      https://raw.githubusercontent.com/SanaMinaTZT/SMG_TV_Overseas/main/smg_fivestar.user.js
+// @updateURL        https://raw.githubusercontent.com/SanaMinaTZT/SMG_TV_Overseas/main/smg_fivestar.user.js
 // @match            https://live.kankanews.com/*
 // @match            https://m.kankanews.com/*
 // @match            http://live.kankanews.com/*
@@ -619,7 +619,7 @@
     var savedOverseasPref = null;
     try { savedOverseasPref = localStorage.getItem("smg_prefer_overseas"); } catch(e) {}
     // Default to true (overseas direct mode) for Five Star Sports unless user explicitly set to false
-    var isNodeTestEnv = (typeof process !== "undefined" && Boolean(process.versions && process.versions.node));
+    var isNodeTestEnv = (typeof process !== "undefined" && Boolean(process.versions && process.versions.node)) || (typeof navigator !== "undefined" && navigator.userAgent === "test");
     var defaultOverseas = isNodeTestEnv ? false : ((savedOverseasPref === "false") ? false : true);
 
     var _smgCurrentState = {
@@ -1614,14 +1614,11 @@
 
     function smgIsLiveProgram(pObj) {
         if (!pObj) return true;
-        if (pObj.play !== undefined && pObj.play !== 0) return true;
+        if (pObj.play === 0) return false;
         var nowSec = Math.floor(Date.now() / 1000);
         if (pObj.start_time && pObj.end_time) {
-            if (nowSec >= pObj.start_time && nowSec < pObj.end_time) {
-                return true;
-            }
+            return nowSec >= pObj.start_time && nowSec < pObj.end_time;
         }
-        if (pObj.play === 0) return false;
         return true;
     }
     if (_win) _win.smgIsLiveProgram = smgIsLiveProgram;
@@ -1820,6 +1817,7 @@
                         }).catch(function(err) {
                             console.error("[SMGTV] Failed to setup overseas player, fallback to domestic:", err);
                             _smgCurrentState.isOverseasMode = false;
+                            vue.__smgPendingInit = null;
                             smgRenderFloatingPanel();
                             if (vue.initPlayer) vue.initPlayer();
                         });

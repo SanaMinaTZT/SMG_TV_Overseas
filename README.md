@@ -1,6 +1,8 @@
-# SMG_TV (五星体育全球海外免梯直连版 · 1080P硬解专修)
+# SMG_TV_Overseas
 
-[![Release](https://img.shields.io/badge/version-v0.24.0-blue.svg)](https://github.com/SanaMinaTZT/SMG_TV/releases)
+> **五星体育全球海外免梯直连版 · 1080P硬解专修**
+
+[![Release](https://img.shields.io/badge/version-v0.24.0-blue.svg)](https://github.com/SanaMinaTZT/SMG_TV_Overseas/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Tampermonkey](https://img.shields.io/badge/Tampermonkey-Supported-green.svg)](https://www.tampermonkey.net/)
 [![Platform](https://img.shields.io/badge/Platform-Global%20Direct%20(海外免梯)-brightgreen.svg)](#-核心突破全球海外免梯直连与-1080p-硬解原理解析)
@@ -68,8 +70,8 @@
 
 1. 浏览器安装 [Tampermonkey](https://www.tampermonkey.net/) 插件（Chrome / Edge / Firefox / Safari / Kiwi 等）。
 2. 点击下方链接，直接在浏览器中触发油猴安装：
-   - 🔗 **[点击一键安装脚本 (GitHub Raw)](https://raw.githubusercontent.com/SanaMinaTZT/SMG_TV/main/smg_fivestar.user.js)**
-   - 备用链接：[smg_fivestar_fixed.user.js](https://raw.githubusercontent.com/SanaMinaTZT/SMG_TV/main/smg_fivestar_fixed.user.js)
+   - 🔗 **[点击一键安装脚本 (GitHub Raw)](https://raw.githubusercontent.com/SanaMinaTZT/SMG_TV_Overseas/main/smg_fivestar.user.js)**
+   - 备用链接：[smg_fivestar_fixed.user.js](https://raw.githubusercontent.com/SanaMinaTZT/SMG_TV_Overseas/main/smg_fivestar_fixed.user.js)
 3. 点击 **“安装”** 或 **“更新”** 按钮。
 4. 打开 [看看新闻·回看直播页面 (五星体育)](https://live.kankanews.com/huikan?id=10)，刷新即可畅享 1080P 直播！
 
