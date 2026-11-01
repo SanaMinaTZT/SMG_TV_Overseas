@@ -1,23 +1,24 @@
 # SMG_TV_Overseas
 
-本脚本基于 [jolin1314joker/SMG_TV](https://github.com/jolin1314joker/SMG_TV) 修改（修改部分由 AI 协助完成），主要用于解决海外 IP 访问看看新闻（`live.kankanews.com`）收看五星体育时出现 `403 Forbidden` 的问题。
+本脚本基于 [jolin1314joker/SMG_TV](https://github.com/jolin1314joker/SMG_TV) 修改（修改部分由 AI 协助完成），用于解除看看新闻（`live.kankanews.com`）五星体育等频道的网页观看限制，支持海外及国内直连观看直播与 6 天节目回看（含 F1 排位赛、正赛等受保护赛事）。
 
 ## 主要改动
 
-1. **支持海外 IP 免梯子直连（五星体育直播）**：
-   看看新闻网页端默认使用的火山引擎 CDN（`volc-stream.kksmg.com`）新增了海外 IP 限制，非中国大陆 IP 直连会返回 `403 Forbidden`。本修改版针对五星体育直播接入了未限制海外 IP 的官方新媒体流，适用于所有海外地区免梯子直连观看（国内网络同样可用，也可在页面右上角手动切换源）。
-2. **引入 `hls.js` 播放**：
-   由于替换后的新媒体直播流需要新版解复用支持（类似高规格媒体流解码兼容），脚本在海外直连模式下使用 `hls.js` 驱动原生 `<video>` 播放。
-3. **动态获取回看供体 ID**：
-   移除了原脚本中写死且已过期的几个历史节目 ID（404），改为自动从频道近期节目单中动态查找可用回看节目来提取 Token。
+1. **修复火山引擎 CDN `403 Forbidden`（海外/国内直连直播与回看）**：
+   站点升级至 `2.45.x` 后，火山引擎 CDN（`volc-stream.kksmg.com`）开始校验流 Token 中的版本号（拒绝 `< 2.45.0` 的旧版 Token），且服务端会按设备 ID（`M-Uuid`）缓存旧 Token；同时回看流的时间窗参数由 `startTime` 改为 `start` + `end`。脚本现已支持动态跟随站点版本签名、遇到旧版缓存 Token 时自动轮换 `M-Uuid`，并改用 `/content/app/tv/...` 接口获取完整流地址，彻底解决 F1 直播与回看 `403` 问题。
+2. **修复受保护赛事（如 F1 排位赛/正赛）无法点击回看与垫片遮挡**：
+   解除节目单中 `is_shield`、`can_review` 及垫片图层（`is_exist_pad` / `pad_src`）限制，历史排期中的 F1 赛事可直接点击回看并支持拖拽进度条。
+3. **内置双线路切换（官方原画源 + 新媒体 1080P 备用直播源）**：
+   页面右上角提供快捷切换按钮：
+   - **线路 1（默认）**：官方源直连，支持五星体育全部赛事（含 F1 直播与 6 天回看）。
+   - **线路 2（备用）**：五星体育新媒体 1080P 直播源（`Hls.js` 驱动），若遇新媒体端赛事版权切流或点击回看节目时，会自动切回线路 1。
 
 ## 安装与使用
 
 1. 浏览器安装 [Tampermonkey (油猴)](https://www.tampermonkey.net/) 扩展。
 2. 点击下方链接一键安装脚本：
    👉 **[点击安装 smg_fivestar.user.js](https://raw.githubusercontent.com/SanaMinaTZT/SMG_TV_Overseas/main/smg_fivestar.user.js)**
-3. 打开 [看看新闻 - 五星体育直播页](https://live.kankanews.com/huikan?id=10) 即可观看。
-   - 首次打开若油猴提示跨域请求授权（`gsports-api.smgtech.net` / `cms-tvflow.gsports.net.cn`），点击“始终允许”即可。
+3. 打开 [看看新闻 - 五星体育直播页](https://live.kankanews.com/huikan?id=10) 即可观看（若刚更新脚本，刷新一次页面即可生效）。
 
 ## 致谢
 
